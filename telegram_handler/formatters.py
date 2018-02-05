@@ -50,7 +50,7 @@ class HtmlFormatter(TelegramFormatter):
         if record.name:
             record.name = escape_html(str(record.name))
         if record.msg:
-            record.msg = escape_html(record.getMessage())
+            record.msg = escape_html(record.msg)
         if self.use_emoji:
             if record.levelno == logging.DEBUG:
                 record.levelname += ' ' + EMOJI.WHITE_CIRCLE
