@@ -1,6 +1,5 @@
+import html
 import logging
-
-from telegram_handler.utils import escape_html
 
 __all__ = ['TelegramFormatter', 'MarkdownFormatter', 'HtmlFormatter']
 
@@ -46,11 +45,11 @@ class HtmlFormatter(TelegramFormatter):
         """
 
         if record.funcName:
-            record.funcName = escape_html(str(record.funcName))
+            record.funcName = html.escape(str(record.funcName))
         if record.name:
-            record.name = escape_html(str(record.name))
+            record.name = html.escape(str(record.name))
         if record.msg:
-            record.msg = escape_html(record.msg)
+            record.msg = html.escape(record.msg)
         if self.use_emoji:
             if record.levelno == logging.DEBUG:
                 record.levelname += ' ' + EMOJI.WHITE_CIRCLE
@@ -63,4 +62,4 @@ class HtmlFormatter(TelegramFormatter):
 
     def formatException(self, *args, **kwargs):
         string = super(HtmlFormatter, self).formatException(*args, **kwargs)
-        return '<pre>%s</pre>' % escape_html(string)
+        return '<pre>%s</pre>' % html.escape(string)
